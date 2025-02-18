@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">pypypy</string>
+    <string name="hello">Привет!</string>
+    <string name="sign_in_subitile">Заполните Свои данные или продолжите через социальные медиа</string>
+</resources>
