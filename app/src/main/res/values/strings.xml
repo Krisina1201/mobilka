@@ -1,5 +1,26 @@
 <resources>
     <string name="app_name">pypypy</string>
     <string name="hello">Привет!</string>
-    <string name="sign_in_subitile">Заполните Свои данные или продолжите через социальные медиа</string>
+    <string name="sign_in_sobitie">Заполните Свои данные или продолжите через социальные медиа</string>
+    <string name="box_email">xyz@gmail.com</string>
+    <string name="enter">Войти</string>
+    <string name="addUser">Вы впервые? Создать пользователя</string>
+    <string name="registTitle">Регистрация</string>
+    <string name="RegistSubTitle">Заполните Свои данные или продолжите через социальные медиа</string>
+    <string name="registrName">xxxxxxxx</string>
+    <string name="regist">Зарегистрироваться</string>
+    <string name="forgotPassword1">Забыл пароль</string>
+    <string name="forgotPassword2">Введите Cвою Учетную Запись Для Сброса</string>
+    <string name="otpravit">Отправить</string>
+    <string name="emailHasError">xyz@gmail.com</string>
+    <string name="uncorrect_email">Не понятная запись 2</string>
+    <string name="email">Email</string>
+    <string name="password_template">xxxxxxxx</string>
+    <string name="uncorrtect_password">НЕ понятная запись 5 пароль</string>
+    <string name="password">Пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="forgotPasswordButton">Отправить</string>
+    <string name="uncorrectName">Не корректное имя</string>
+    <string name="userName">Ваше имя</string>
+    <string name="maskPassword">*********</string>
 </resources>

@@ -20,7 +20,9 @@ data class MutColors (
     val text: Color,
     val subTextDark: Color,
     val background: Color,
-    val hint: Color)
+    val hint: Color,
+    val accent: Color,
+    )
 
 @Immutable
 data class MatubleTextStyle (
@@ -46,7 +48,8 @@ val localMatybaleColor = staticCompositionLocalOf {
         text = Color.Unspecified,
         subTextDark = Color.Unspecified,
         background = Color.Unspecified,
-        hint = Color.Unspecified
+        hint = Color.Unspecified,
+        accent = Color.Unspecified
     )
 }
 
@@ -66,7 +69,8 @@ fun MatuleTheme(content: @Composable () -> Unit) {
         text = Color(0xFF2B2B2B),
         subTextDark = Color(0xFF707B81),
         background = Color(0xFFF7F7F9),
-        hint = Color(0x6A6A6A)
+        hint = Color(0xFF6A6A6A),
+        accent = Color(0xFF48B2E7)
     )
     val matuleTypography = MatubleTextStyle (
         headingBold32 = TextStyle(fontFamily = fontFamily, fontWeight = FontWeight.Bold, fontSize = 32.sp),
