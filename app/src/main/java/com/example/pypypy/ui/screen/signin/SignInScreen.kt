@@ -29,10 +29,12 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationDrawerItemColors
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -40,30 +42,51 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import com.example.pypypy.ui.theme.MatuleTheme
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.pypypy.R
-import com.example.pypypy.ui.common.CommonButton
+import com.example.pypypy.ui.screen.common.CommonButton
 import com.example.pypypy.ui.screen.component.AuthTextField
 import com.example.pypypy.ui.screen.component.TitleWithSubtitleText
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pypypy.data.model.AuthRequest
+import com.example.pypypy.data.model.RegistrationRequest
+import com.example.pypypy.data.repository.AuthRepositoryImpl
+import com.example.pypypy.domain.usecase.AuthUseCase
+import com.example.pypypy.ui.screen.regist.RegistrViewModel
+import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
+
 
 @Composable
-fun SignInScreen(){
-    val signInViewModel: SignInViewModel = viewModel()
-    Scaffold (
-        topBar = {
+fun SignInScreen(onNavigationToScreenPassword: () -> Unit,
+                 onNavigationToScreenRegistor: () -> Unit,
+                 repositoryImpl: AuthRepositoryImpl,
+                 authUseCase: AuthUseCase) {
 
+    val viewModel: SignInViewModel = viewModel(
+        factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return SignInViewModel(authUseCase) as T
+            }
+        }
+    )
+    
+    Scaffold(
+        topBar = {
             Row(
                 modifier = Modifier
                     .padding(top = 35.dp)
                     .fillMaxWidth()
                     .height(40.dp)
-            ){
+            ) {
                 IconButton(onClick = {}) {
-                    Icon(painter = painterResource(R.drawable.direction_left),
-                        contentDescription = null)
+                    Icon(painter = painterResource(R.drawable.direction_left), contentDescription = null)
                 }
             }
         },
@@ -75,34 +98,35 @@ fun SignInScreen(){
                     .padding(bottom = 50.dp)
                     .fillMaxWidth()
                     .height(40.dp)
-
-            ){
+            ) {
                 Text(
                     text = stringResource(R.string.addUser),
                     style = MatuleTheme.tupography.bodyRegular16.copy(color = MatuleTheme.colors.text),
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .clickable(
-                            onClick = {},
+                            onClick = onNavigationToScreenRegistor,
                             role = Role.Button,
                             indication = LocalIndication.current,
                             interactionSource = remember { MutableInteractionSource() }
                         )
                         .padding(8.dp)
                 )
-                }
             }
-    ) {
-        paddingValues ->
-        SignInContent(paddingValues, signInViewModel)
+        }
+    ) { paddingValues ->
+        SignInContent(paddingValues, onNavigationToScreenPassword = onNavigationToScreenPassword, viewModel = viewModel)
     }
-
 }
 
 @Composable
-fun SignInContent(paddingValues: PaddingValues, signInViewModel: SignInViewModel){
-    val signInState = signInViewModel.signInState
-    Column (
+fun SignInContent(
+    paddingValues: PaddingValues,
+    onNavigationToScreenPassword: () -> Unit,
+    viewModel: SignInViewModel
+) {
+    var signInState = viewModel.signInState
+    Column(
         modifier = Modifier.padding(paddingValues = paddingValues),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -113,46 +137,60 @@ fun SignInContent(paddingValues: PaddingValues, signInViewModel: SignInViewModel
 
         AuthTextField(
             value = signInState.value.email,
-            onChangeValue = {
-                signInViewModel.setEmail(it)
-            },
-            isError = signInViewModel.emailHasError.value,
-            placeholder = {
-                Text(text = stringResource(R.string.emailHasError))
-            },
-            supportingText = {
-                Text(text = stringResource(R.string.uncorrect_email))
-            },
-            label = {
-                Text(text = stringResource(R.string.email))
-            }
+            onChangeValue = { viewModel.setEmail(it) },
+            isError = viewModel.emailHasError.value,
+            placeholder = { Text(text = stringResource(R.string.emailHasError)) },
+            supportingText = { Text(text = stringResource(R.string.uncorrect_email)) },
+            label = { Text(text = stringResource(R.string.email)) }
         )
 
         AuthTextField(
             value = signInState.value.password,
-            onChangeValue = {
-                signInViewModel.setPassword(it)
-            },
+            onChangeValue = { viewModel.setPassword(it) },
             isError = false,
-            placeholder = {
-                Text(text = stringResource(R.string.password_template))
-            },
-            supportingText = {
-                Text(text = stringResource(R.string.uncorrtect_password))
-            },
-            label = {
-                Text(text = stringResource(R.string.password))
-            }
+            placeholder = { Text(text = stringResource(R.string.password_template)) },
+            supportingText = { Text(text = stringResource(R.string.uncorrtect_password)) },
+            label = { Text(text = stringResource(R.string.password)) }
         )
-        AuthButton(
-            onClick = {}
-        ) {
+
+        Text(
+            text = "Забыли пароль?",
+            style = MatuleTheme.tupography.bodyRegular16.copy(color = MatuleTheme.colors.text),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .clickable(
+                    onClick = onNavigationToScreenPassword,
+                    role = Role.Button,
+                    indication = LocalIndication.current,
+                    interactionSource = remember { MutableInteractionSource() }
+                )
+                .padding(8.dp)
+        )
+
+        val coroutine = rememberCoroutineScope()
+
+        AuthButton(onClick = {
+                viewModel.sighIn()
+        }) {
             Text(stringResource(R.string.sign_in))
         }
-
     }
 }
 
 
-
+//AuthButton(
+//onClick = {
+//    coroutine.launch {
+//        val registRequest = RegistrationRequest (
+//            email = regState.value.email,
+//            password = regState.value.password,
+//            userName = regState.value.name
+//        )
+//
+//        repository.registration(registRequest)
+//    }
+//}
+//) {
+//    Text(stringResource(R.string.regist))
+//}
 

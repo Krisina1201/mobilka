@@ -13,14 +13,15 @@
     <string name="forgotPassword2">Введите Cвою Учетную Запись Для Сброса</string>
     <string name="otpravit">Отправить</string>
     <string name="emailHasError">xyz@gmail.com</string>
-    <string name="uncorrect_email">Не понятная запись 2</string>
+    <string name="uncorrect_email">Не коррекктный email</string>
     <string name="email">Email</string>
     <string name="password_template">xxxxxxxx</string>
-    <string name="uncorrtect_password">НЕ понятная запись 5 пароль</string>
+    <string name="uncorrtect_password">Не корректный пароль</string>
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
     <string name="forgotPasswordButton">Отправить</string>
     <string name="uncorrectName">Не корректное имя</string>
     <string name="userName">Ваше имя</string>
     <string name="maskPassword">*********</string>
+    <string name="forgotPasswordText">Забыли пароль?</string>
 </resources>

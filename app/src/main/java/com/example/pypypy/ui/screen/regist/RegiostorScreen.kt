@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,16 +32,33 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pypypy.R
+import com.example.pypypy.data.model.RegistrationRequest
+import com.example.pypypy.data.model.RegistrationResponse
+import com.example.pypypy.data.repository.AuthRepositoryImpl
+import com.example.pypypy.domain.usecase.AuthUseCase
 import com.example.pypypy.ui.screen.component.AuthTextField
 import com.example.pypypy.ui.screen.component.TitleWithSubtitleText
 import com.example.pypypy.ui.theme.MatuleTheme
+import kotlinx.coroutines.launch
 
 
 @Composable
-fun RegistorScreen() {
-    val signInViewModel: RegistrViewModel = viewModel()
+fun RegistorScreen(onNavigationToSignScreen: () -> Unit,
+                   repository: AuthRepositoryImpl,
+                   authUseCase: AuthUseCase) {
+
+    val viewModel: RegistrViewModel = viewModel(
+        factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return RegistrViewModel(authUseCase) as T
+            }
+        }
+    )
+
     Scaffold(
         topBar = {
             Row(
@@ -66,20 +84,32 @@ fun RegistorScreen() {
                     .height(40.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.regist),
+                    text = "Есть аккаунт? Войти",
                     style = MatuleTheme.tupography.bodyRegular16.copy(color = MatuleTheme.colors.text),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .clickable(
+                            onClick = onNavigationToSignScreen,
+                            role = Role.Button,
+                            indication = LocalIndication.current,
+                            interactionSource = remember { MutableInteractionSource() }
+                        )
+                        .padding(8.dp)
                 )
             }
         }
     ) { paddingValues ->
-        RegistorInContent(paddingValues, signInViewModel)
+        RegistorInContent(paddingValues, repository, viewModel)
     }
 }
 
 @Composable
-fun RegistorInContent(paddingValues: PaddingValues, signInViewModel: RegistrViewModel) {
-    val regState = signInViewModel.signInState
+fun RegistorInContent(paddingValues: PaddingValues,
+                      repository: AuthRepositoryImpl,
+                      viewModel: RegistrViewModel) {
+    val regState = viewModel.signInState
+
+    
     Column (modifier = Modifier.padding(paddingValues = paddingValues))
     {
         TitleWithSubtitleText(
@@ -90,9 +120,9 @@ fun RegistorInContent(paddingValues: PaddingValues, signInViewModel: RegistrView
         AuthTextField(
             value = regState.value.name,
             onChangeValue = {
-                signInViewModel.setName(it)
+                viewModel.setName(it)
             },
-            isError = signInViewModel.nameHasError.value,
+            isError = viewModel.nameHasError.value,
             placeholder = {
                 Text(text = stringResource(R.string.registrName))
             },
@@ -108,9 +138,9 @@ fun RegistorInContent(paddingValues: PaddingValues, signInViewModel: RegistrView
         AuthTextField(
             value = regState.value.email,
             onChangeValue = {
-                signInViewModel.setEmail(it)
+                viewModel.setEmail(it)
             },
-            isError = signInViewModel.emailHasError.value,
+            isError = viewModel.emailHasError.value,
             placeholder = {
                 Text(text = stringResource(R.string.box_email))
             },
@@ -126,7 +156,7 @@ fun RegistorInContent(paddingValues: PaddingValues, signInViewModel: RegistrView
         AuthTextField(
             value = regState.value.password,
             onChangeValue = {
-                signInViewModel.setPassword(it)
+                viewModel.setPassword(it)
             },
             isError = false,
             placeholder = {
@@ -162,10 +192,14 @@ fun RegistorInContent(paddingValues: PaddingValues, signInViewModel: RegistrView
                 style = MatuleTheme.tupography.subTitleRegular16.copy(color = MatuleTheme.colors.subTextDark))
         }
 
+        val coroutine = rememberCoroutineScope()
+
         AuthButton(
-            onClick = {}
+            onClick = {
+                viewModel.registration()
+            }
         ) {
-            Text(stringResource(R.string.sign_in))
+            Text(stringResource(R.string.regist))
         }
 
     }

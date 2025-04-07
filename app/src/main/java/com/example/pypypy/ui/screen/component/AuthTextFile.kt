@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.unit.dp
-import com.example.pypypy.ui.common.CommonTextField
+import com.example.pypypy.ui.screen.common.CommonTextField
 
 @Composable
 fun AuthTextField(

@@ -53,11 +53,6 @@ fun ForgotPass() {
                     .fillMaxWidth()
                     .height(40.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.sign_in),
-                    style = MatuleTheme.tupography.bodyRegular16.copy(color = MatuleTheme.colors.text),
-                    textAlign = TextAlign.Center
-                )
             }
         }
     )
@@ -67,7 +62,9 @@ fun ForgotPass() {
 }
 
 @Composable
-fun Content (paddingValues: PaddingValues, signInViewModel: ForgotPasswordViewModel) {
+fun Content (paddingValues: PaddingValues,
+             signInViewModel: ForgotPasswordViewModel
+) {
 
     val signInState = signInViewModel.signInState
 

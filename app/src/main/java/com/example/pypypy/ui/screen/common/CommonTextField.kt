@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.common
+package com.example.pypypy.ui.screen.common
 
 import android.view.ViewAnimationUtils
 import androidx.compose.foundation.background
