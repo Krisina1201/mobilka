@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.regist
+package com.example.pypypy.ui.screen.signUp.regist
 
 data class RegostrInState (
     var name: String = "ajdoeij",

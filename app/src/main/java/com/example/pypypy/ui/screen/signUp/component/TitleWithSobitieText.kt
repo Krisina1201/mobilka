@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.component
+package com.example.pypypy.ui.screen.signUp.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

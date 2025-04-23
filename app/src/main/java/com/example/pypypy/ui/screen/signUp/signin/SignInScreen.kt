@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.signin
+package com.example.pypypy.ui.screen.signUp.signin
 
 
 import AuthButton
@@ -47,9 +47,9 @@ import com.example.pypypy.ui.theme.MatuleTheme
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pypypy.R
-import com.example.pypypy.ui.screen.common.CommonButton
-import com.example.pypypy.ui.screen.component.AuthTextField
-import com.example.pypypy.ui.screen.component.TitleWithSubtitleText
+import com.example.pypypy.ui.screen.signUp.common.CommonButton
+import com.example.pypypy.ui.screen.signUp.component.AuthTextField
+import com.example.pypypy.ui.screen.signUp.component.TitleWithSubtitleText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -57,25 +57,20 @@ import com.example.pypypy.data.model.AuthRequest
 import com.example.pypypy.data.model.RegistrationRequest
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
-import com.example.pypypy.ui.screen.regist.RegistrViewModel
+import com.example.pypypy.ui.screen.signUp.regist.RegistrViewModel
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
 fun SignInScreen(onNavigationToScreenPassword: () -> Unit,
                  onNavigationToScreenRegistor: () -> Unit,
-                 repositoryImpl: AuthRepositoryImpl,
-                 authUseCase: AuthUseCase) {
+                 onNavigationToHome: () -> Unit) {
 
-    val viewModel: SignInViewModel = viewModel(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return SignInViewModel(authUseCase) as T
-            }
-        }
-    )
+
+    val SignInViewModel: SignInViewModel = koinViewModel<SignInViewModel>()
     
     Scaffold(
         topBar = {
@@ -115,7 +110,7 @@ fun SignInScreen(onNavigationToScreenPassword: () -> Unit,
             }
         }
     ) { paddingValues ->
-        SignInContent(paddingValues, onNavigationToScreenPassword = onNavigationToScreenPassword, viewModel = viewModel)
+        SignInContent(paddingValues, onNavigationToScreenPassword = onNavigationToScreenPassword, viewModel = SignInViewModel, onNavigationToHome= onNavigationToHome)
     }
 }
 
@@ -123,6 +118,7 @@ fun SignInScreen(onNavigationToScreenPassword: () -> Unit,
 fun SignInContent(
     paddingValues: PaddingValues,
     onNavigationToScreenPassword: () -> Unit,
+    onNavigationToHome: () -> Unit,
     viewModel: SignInViewModel
 ) {
     var signInState = viewModel.signInState
@@ -173,6 +169,11 @@ fun SignInContent(
                 viewModel.sighIn()
         }) {
             Text(stringResource(R.string.sign_in))
+        }
+        Button(
+            onClick = onNavigationToHome
+        ) {
+            Text("кнопка")
         }
     }
 }

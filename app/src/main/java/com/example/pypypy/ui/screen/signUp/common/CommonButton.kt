@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.common
+package com.example.pypypy.ui.screen.signUp.common
 
 
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.forgotPassword
+package com.example.pypypy.ui.screen.signUp.forgotPassword
 
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf

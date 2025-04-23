@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.pypypy.ui.screen.common.CommonButton
+import com.example.pypypy.ui.screen.signUp.common.CommonButton
 import com.example.pypypy.ui.theme.MatuleTheme
 
 @Composable

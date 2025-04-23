@@ -12,9 +12,10 @@ import com.example.pypypy.data.local.DataStore
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.di.appModules
 import com.example.pypypy.domain.usecase.AuthUseCase
-import com.example.pypypy.ui.screen.forgotPassword.ForgotPass
-import com.example.pypypy.ui.screen.regist.RegistorScreen
-import com.example.pypypy.ui.screen.signin.SignInScreen
+import com.example.pypypy.ui.screen.home.home.HomeScreen
+import com.example.pypypy.ui.screen.signUp.forgotPassword.ForgotPass
+import com.example.pypypy.ui.screen.signUp.regist.RegistorScreen
+import com.example.pypypy.ui.screen.signUp.signin.SignInScreen
 import com.example.pypypy.ui.theme.MatuleTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -22,11 +23,6 @@ import org.koin.core.context.startKoin
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        startKoin {
-            androidContext(applicationContext)
-            modules(appModules)
-        }
 
         enableEdgeToEdge()
 
@@ -42,16 +38,14 @@ class MainActivity : ComponentActivity() {
                         SignInScreen(
                             onNavigationToScreenPassword = { navController.navigate("forgotPassword") },
                             onNavigationToScreenRegistor = { navController.navigate("registScreen") },
-                            repositoryImpl = repository,
-                            authUseCase = authUseCase
+                            onNavigationToHome = {navController.navigate("homeScreen")}
                         )
                     }
+                    composable("homeScreen") { HomeScreen() }
                     composable("forgotPassword") { ForgotPass() }
                     composable("registScreen") {
                         RegistorScreen(
-                            onNavigationToSignScreen = { navController.navigate("signIn") },
-                            repository = repository,
-                            authUseCase = authUseCase
+                            onNavigationToSignScreen = { navController.navigate("signIn") }
                         )
                     }
                 }

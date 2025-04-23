@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.forgotPassword
+package com.example.pypypy.ui.screen.signUp.forgotPassword
 
 import AuthButton
 import androidx.compose.foundation.layout.Arrangement
@@ -21,8 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pypypy.R
-import com.example.pypypy.ui.screen.component.AuthTextField
-import com.example.pypypy.ui.screen.component.TitleWithSubtitleText
+import com.example.pypypy.ui.screen.signUp.component.AuthTextField
+import com.example.pypypy.ui.screen.signUp.component.TitleWithSubtitleText
 import com.example.pypypy.ui.theme.MatuleTheme
 
 @Composable

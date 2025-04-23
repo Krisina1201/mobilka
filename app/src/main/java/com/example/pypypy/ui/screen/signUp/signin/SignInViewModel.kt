@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.signin
+package com.example.pypypy.ui.screen.signUp.signin
 
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf

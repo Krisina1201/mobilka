@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.regist
+package com.example.pypypy.ui.screen.signUp.regist
 
 
 import AuthButton
@@ -40,25 +40,20 @@ import com.example.pypypy.data.model.RegistrationRequest
 import com.example.pypypy.data.model.RegistrationResponse
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
-import com.example.pypypy.ui.screen.component.AuthTextField
-import com.example.pypypy.ui.screen.component.TitleWithSubtitleText
+import com.example.pypypy.ui.screen.signUp.component.AuthTextField
+import com.example.pypypy.ui.screen.signUp.component.TitleWithSubtitleText
 import com.example.pypypy.ui.theme.MatuleTheme
 import kotlinx.coroutines.launch
 
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
+
 
 @Composable
-fun RegistorScreen(onNavigationToSignScreen: () -> Unit,
-                   repository: AuthRepositoryImpl,
-                   authUseCase: AuthUseCase) {
+fun RegistorScreen(onNavigationToSignScreen: () -> Unit) {
 
-    val viewModel: RegistrViewModel = viewModel(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return RegistrViewModel(authUseCase) as T
-            }
-        }
-    )
-
+    val registrViewModel: RegistrViewModel = koinViewModel<RegistrViewModel>()
     Scaffold(
         topBar = {
             Row(
@@ -99,14 +94,14 @@ fun RegistorScreen(onNavigationToSignScreen: () -> Unit,
             }
         }
     ) { paddingValues ->
-        RegistorInContent(paddingValues, repository, viewModel)
+        RegistorInContent(paddingValues,registrViewModel)
     }
 }
 
 @Composable
 fun RegistorInContent(paddingValues: PaddingValues,
-                      repository: AuthRepositoryImpl,
-                      viewModel: RegistrViewModel) {
+                      viewModel: RegistrViewModel
+) {
     val regState = viewModel.signInState
 
     

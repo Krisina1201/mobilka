@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.signin
+package com.example.pypypy.ui.screen.signUp.signin
 
 data class SignInState (
     var email: String = "123@mail.ru",

@@ -1,4 +1,4 @@
-package com.example.pypypy.ui.screen.forgotPassword
+package com.example.pypypy.ui.screen.signUp.forgotPassword
 
 data class ForgotPasswordState (
     var email: String = "",
