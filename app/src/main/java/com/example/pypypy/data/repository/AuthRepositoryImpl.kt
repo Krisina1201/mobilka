@@ -2,9 +2,9 @@ package com.example.pypypy.data.repository
 
 import com.example.pypypy.data.remote.retrofit.AuthSource
 import com.example.pypypy.data.local.DataStore
-import com.example.pypypy.data.model.AuthRequest
-import com.example.pypypy.data.model.RegistrationRequest
-import com.example.pypypy.data.model.RegistrationResponse
+import com.example.pypypy.data.model.SignInModel.AuthRequest
+import com.example.pypypy.data.model.SignInModel.RegistrationRequest
+import com.example.pypypy.data.model.SignInModel.RegistrationResponse
 import kotlinx.coroutines.delay
 
 

@@ -1,4 +1,4 @@
-package com.example.pypypy.data.model
+package com.example.pypypy.data.model.SignInModel
 
 import kotlinx.serialization.Serializable
 

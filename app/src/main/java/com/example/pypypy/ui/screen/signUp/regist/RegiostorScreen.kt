@@ -32,21 +32,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pypypy.R
-import com.example.pypypy.data.model.RegistrationRequest
-import com.example.pypypy.data.model.RegistrationResponse
-import com.example.pypypy.data.repository.AuthRepositoryImpl
-import com.example.pypypy.domain.usecase.AuthUseCase
 import com.example.pypypy.ui.screen.signUp.component.AuthTextField
 import com.example.pypypy.ui.screen.signUp.component.TitleWithSubtitleText
 import com.example.pypypy.ui.theme.MatuleTheme
-import kotlinx.coroutines.launch
 
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 

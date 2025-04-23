@@ -4,9 +4,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pypypy.data.model.AuthRequest
-import com.example.pypypy.data.model.RegistrationRequest
+import com.example.pypypy.data.model.SignInModel.AuthRequest
 import com.example.pypypy.data.remote.NetworkResponse
 import com.example.pypypy.domain.usecase.AuthUseCase
 import kotlinx.coroutines.launch

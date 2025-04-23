@@ -3,7 +3,6 @@ package com.example.pypypy.ui.screen.signUp.signin
 
 import AuthButton
 import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -19,48 +18,19 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationDrawerItemColors
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextDecoration
 import com.example.pypypy.ui.theme.MatuleTheme
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.pypypy.R
-import com.example.pypypy.ui.screen.signUp.common.CommonButton
 import com.example.pypypy.ui.screen.signUp.component.AuthTextField
 import com.example.pypypy.ui.screen.signUp.component.TitleWithSubtitleText
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pypypy.data.model.AuthRequest
-import com.example.pypypy.data.model.RegistrationRequest
-import com.example.pypypy.data.repository.AuthRepositoryImpl
-import com.example.pypypy.domain.usecase.AuthUseCase
-import com.example.pypypy.ui.screen.signUp.regist.RegistrViewModel
-import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
 import org.koin.compose.viewmodel.koinViewModel
 
 

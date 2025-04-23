@@ -1,9 +1,8 @@
 package com.example.pypypy.domain.usecase
 
-import android.app.appsearch.ReportUsageRequest
 import com.example.pypypy.data.local.DataStore
-import com.example.pypypy.data.model.AuthRequest
-import com.example.pypypy.data.model.RegistrationRequest
+import com.example.pypypy.data.model.SignInModel.AuthRequest
+import com.example.pypypy.data.model.SignInModel.RegistrationRequest
 import com.example.pypypy.data.remote.NetworkResponse
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import kotlinx.coroutines.flow.Flow

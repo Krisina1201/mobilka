@@ -38,116 +38,84 @@ fun ProductItem(
     Column(
         modifier = Modifier
             .width(160.dp)
+            .height(186.5.dp) // Точная высота из макета
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
             .clickable(onClick = onClick)
-            .padding(bottom = 8.dp),
-        verticalArrangement = Arrangement.Top
+            .aspectRatio(1f)
+            .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // Image Section
-        Column(
+        IconButton(
+            onClick = { /* Favorite action */ },
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
+                .padding(8.dp)
+                .size(24.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
-            ) {
-                Image(
-                    painter = imageRes,
-                    contentDescription = name,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                        .padding(5.dp)
-                )
-
-                // Favorite Button
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    horizontalAlignment = Alignment.End
-                ) {
-                    IconButton(
-                        onClick = { /* Favorite action */ },
-                        modifier = Modifier.size(32.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.icon),
-                            contentDescription = "Favorite",
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
-            }
+            Image(
+                painter = painterResource(R.drawable.icon),
+                contentDescription = "Favorite",
+                modifier = Modifier.size(28.dp)
+            )
         }
+        Image(
+            painter = imageRes,
+            contentDescription = name,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(114.dp, 53.dp).padding(horizontal = 12.dp)
+        )
 
-        // Text Content Section
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp)
-                .padding(top = 8.dp)
+                .padding(bottom = 12.dp)
         ) {
-            // Title
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = title,
-                    color = colors.accent,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            // BEST SELLER label
+            Text(
+                text = title,
+                color = colors.accent,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
 
             // Product Name
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = name,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color.Black,
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-            }
+            Text(
+                text = name,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.Black,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
 
-            // Price and Add to Cart
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp)
+            // Price and Cart Button
+            Row(
+                modifier = Modifier.align(Alignment.Start).fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Price
-                    Column {
-                        Text(
-                            text = price,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Black
-                        )
-                    }
+                Text(
+                    text = price,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
 
-                    // Add to Cart Button
-                    Column {
-                        IconButton(
-                            onClick = { /* Add to cart action */ },
-                            modifier = Modifier.size(24.dp)
-                        ) {
-                            Image(
-                                painter = painterResource(R.drawable.group_107),
-                                contentDescription = "Add to cart",
-                                modifier = Modifier.size(16.dp)
-                            )
-                        }
-                    }
+                IconButton(
+                    onClick = { /* Add to cart */ },
+                    modifier = Modifier.size(36.dp)
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.group_1072),
+                        contentDescription = "Add to cart",
+                        modifier = Modifier
+                            .size(36.dp)
+                    )
                 }
             }
         }
     }
 }
+
