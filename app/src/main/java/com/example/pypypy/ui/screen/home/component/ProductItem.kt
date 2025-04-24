@@ -33,7 +33,9 @@ fun ProductItem(
     name: String,
     price: String,
     imageRes: Painter,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+
+
 ) {
     Column(
         modifier = Modifier

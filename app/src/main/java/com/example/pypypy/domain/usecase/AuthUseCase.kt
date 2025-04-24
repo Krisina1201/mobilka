@@ -3,7 +3,9 @@ package com.example.pypypy.domain.usecase
 import com.example.pypypy.data.local.DataStore
 import com.example.pypypy.data.model.SignInModel.AuthRequest
 import com.example.pypypy.data.model.SignInModel.RegistrationRequest
+import com.example.pypypy.data.model.SnekersModel.PopularSneakersResponse
 import com.example.pypypy.data.remote.NetworkResponse
+import com.example.pypypy.data.remote.NetworkResponseSneakers
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -41,5 +43,9 @@ class AuthUseCase(private val dataStore: DataStore,
             emit(NetworkResponse.Error("Unknown Error"))
         }
 
+    }
+
+    suspend fun getSneakers(): Flow<NetworkResponseSneakers<List<PopularSneakersResponse>>> {
+        return authRepository.getSneakers()
     }
 }

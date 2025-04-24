@@ -56,6 +56,8 @@ android {
 dependencies {
     val nav_version = "2.8.9"
 
+    implementation("androidx.compose.foundation:foundation:1.4.0")
+
     implementation(libs.koin.compose)
     implementation(libs.koin.compose.viewmodel)
 

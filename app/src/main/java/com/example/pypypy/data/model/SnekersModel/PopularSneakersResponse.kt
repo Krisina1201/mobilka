@@ -1,5 +1,8 @@
 package com.example.pypypy.data.model.SnekersModel
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PopularSneakersResponse(
     val id: Int,
     var productName: String,

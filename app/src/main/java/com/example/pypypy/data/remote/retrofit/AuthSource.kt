@@ -14,5 +14,5 @@ interface AuthSource {
     @POST("/login")
     suspend fun login(@Body authRequest: AuthRequest): RegistrationResponse
     @GET("/allSneakers")
-    suspend fun popular(): PopularSneakersResponse
+    suspend fun popular(): List<PopularSneakersResponse>
 }
