@@ -28,8 +28,8 @@ fun TopPanel(title: String,
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp)
-            .padding(top = 35.dp, start = 16.dp)
+            .height(100.dp)
+            .padding(top = 55.dp, start = 16.dp)
     ) {
         IconButton(
             onClick = {},
