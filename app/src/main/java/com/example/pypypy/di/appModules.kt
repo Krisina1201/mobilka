@@ -1,14 +1,11 @@
 package com.example.pypypy.di
 
-import androidx.datastore.dataStore
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pypypy.data.local.DataStore
 import com.example.pypypy.data.remote.RetrofitClient
 import com.example.pypypy.data.remote.retrofit.AuthSource
-import com.example.pypypy.data.repository.AuthRepository
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
-import com.example.pypypy.ui.screen.home.home.PopylarSneakersViewModel
+import com.example.pypypy.ui.screen.home.popylar.PopylarSneakersViewModel
 import com.example.pypypy.ui.screen.signUp.regist.RegistrViewModel
 import com.example.pypypy.ui.screen.signUp.signin.SignInViewModel
 import org.koin.core.module.dsl.viewModel

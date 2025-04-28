@@ -22,7 +22,6 @@ fun AuthButton(
             disabledContentColor = MatuleTheme.colors.accent,
             disabledContainerColor = MatuleTheme.colors.accent
         ),
-        modifier = modifier.padding(top = 50.dp),
     ){
         content()
     }

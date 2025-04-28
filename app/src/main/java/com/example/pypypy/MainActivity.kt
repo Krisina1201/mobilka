@@ -10,15 +10,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pypypy.data.remote.RetrofitClient
 import com.example.pypypy.data.local.DataStore
 import com.example.pypypy.data.repository.AuthRepositoryImpl
-import com.example.pypypy.di.appModules
 import com.example.pypypy.domain.usecase.AuthUseCase
-import com.example.pypypy.ui.screen.home.home.HomeScreen
+import com.example.pypypy.ui.screen.home.home.HomeScreenHast
+import com.example.pypypy.ui.screen.home.popylar.HomeScreen
 import com.example.pypypy.ui.screen.signUp.forgotPassword.ForgotPass
 import com.example.pypypy.ui.screen.signUp.regist.RegistorScreen
 import com.example.pypypy.ui.screen.signUp.signin.SignInScreen
 import com.example.pypypy.ui.theme.MatuleTheme
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +39,7 @@ class MainActivity : ComponentActivity() {
                             onNavigationToHome = {navController.navigate("homeScreen")}
                         )
                     }
-                    composable("homeScreen") { HomeScreen() }
+                    composable("homeScreen") { HomeScreenHast() }
                     composable("forgotPassword") { ForgotPass() }
                     composable("registScreen") {
                         RegistorScreen(

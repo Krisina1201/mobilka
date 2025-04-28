@@ -1,9 +1,8 @@
-package com.example.pypypy.ui.screen.home.home
+package com.example.pypypy.ui.screen.home.popylar
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pypypy.data.model.SnekersModel.PopularSneakersResponse
-import com.example.pypypy.data.remote.NetworkResponse
 import com.example.pypypy.data.remote.NetworkResponseSneakers
 import com.example.pypypy.domain.usecase.AuthUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
