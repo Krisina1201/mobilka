@@ -9,5 +9,6 @@ data class PopularSneakersResponse(
     var cost: String,
     var count: Int,
     var photo: String,
-    var description: String
+    var description: String,
+    var category: String
 )

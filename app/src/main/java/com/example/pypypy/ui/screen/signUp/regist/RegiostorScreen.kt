@@ -19,6 +19,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -41,7 +42,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
-fun RegistorScreen(onNavigationToSignScreen: () -> Unit) {
+fun RegistorScreen(onNavigationToSignScreen: () -> Unit, onNavigationToHomeScreen: () -> Unit,) {
 
     val registrViewModel: RegistrViewModel = koinViewModel<RegistrViewModel>()
     Scaffold(
@@ -84,13 +85,14 @@ fun RegistorScreen(onNavigationToSignScreen: () -> Unit) {
             }
         }
     ) { paddingValues ->
-        RegistorInContent(paddingValues,registrViewModel)
+        RegistorInContent(paddingValues,registrViewModel, onNavigationToHomeScreen)
     }
 }
 
 @Composable
 fun RegistorInContent(paddingValues: PaddingValues,
-                      viewModel: RegistrViewModel
+                      viewModel: RegistrViewModel,
+                      onNavigationToHomeScreen: () -> Unit
 ) {
     val regState = viewModel.signInState
 
@@ -186,7 +188,11 @@ fun RegistorInContent(paddingValues: PaddingValues,
         ) {
             Text(stringResource(R.string.regist))
         }
-
+        LaunchedEffect(Boolean) {
+            if (regState.value.isSignIn) {
+                onNavigationToHomeScreen()
+            }
+        }
     }
 }
 

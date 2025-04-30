@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 class SignInViewModel(val authUseCase: AuthUseCase): ViewModel() {
     var signInState = mutableStateOf(SignInState())
         private set
-
     val emailHasError = derivedStateOf {
         if(signInState.value.email.isEmpty()) return@derivedStateOf false
         !android.util.Patterns.EMAIL_ADDRESS.matcher(signInState.value.email).matches()

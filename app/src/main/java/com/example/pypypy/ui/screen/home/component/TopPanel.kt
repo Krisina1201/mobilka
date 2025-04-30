@@ -65,3 +65,37 @@ fun TopPanel(title: String,
 
     }
 }
+
+@Composable
+fun topPanelForSort(
+    title: String,
+    leftImage: Painter,
+    textSize: Int
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
+            .padding(top = 55.dp, start = 16.dp)
+    ) {
+        IconButton(
+            onClick = {},
+            modifier = Modifier
+                .size(48.dp)
+                .align(Alignment.CenterStart)
+                .padding(end = 16.dp)
+        ) {
+            Icon(
+                painter = leftImage,
+                contentDescription = "Назад"
+            )
+        }
+
+        Text(
+            text = title,
+            fontWeight = FontWeight.Medium,
+            fontSize = textSize.sp,
+            modifier = Modifier.align(Alignment.Center)
+        )
+    }
+}

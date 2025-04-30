@@ -22,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.painterResource
@@ -91,7 +92,7 @@ fun SignInContent(
     onNavigationToHome: () -> Unit,
     viewModel: SignInViewModel
 ) {
-    var signInState = viewModel.signInState
+    val signInState = viewModel.signInState
     Column(
         modifier = Modifier.padding(paddingValues = paddingValues),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -140,11 +141,14 @@ fun SignInContent(
         }) {
             Text(stringResource(R.string.sign_in))
         }
-        Button(
-            onClick = onNavigationToHome
-        ) {
-            Text("кнопка")
-        }
+
+
+            LaunchedEffect(signInState.value){
+                if (signInState.value.isSignIn) {
+                    onNavigationToHome()
+                    signInState.value.isSignIn = false
+                }
+            }
     }
 }
 

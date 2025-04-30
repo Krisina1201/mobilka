@@ -3,7 +3,9 @@ package com.example.pypypy.ui.screen.home.home
 import android.widget.ImageButton
 import androidx.compose.material3.IconButton
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -46,14 +48,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pypypy.ui.screen.home.component.ProductItem
 import com.example.pypypy.ui.theme.MatuleTheme
 
+data class Name(
+    val name: String
+)
 @Composable
-fun HomeScreenHast() {
+fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
+                   onNavigationToSortScreen: (String) -> Unit) {
     val sneakersViewModel: PopylarSneakersViewModel = koinViewModel<PopylarSneakersViewModel>()
 
     Scaffold(
@@ -68,16 +75,19 @@ fun HomeScreenHast() {
         bottomBar = { BottomBar() }
     ) {
         paddingValues ->
-        HomeScreenContent(paddingValues = paddingValues, sneakersViewModel);
+        HomeScreenContent(paddingValues = paddingValues, viewModel = sneakersViewModel, onNavigationToPopylarScreen, onNavigationToSortScreen);
     }
 }
 
 @Composable
 fun HomeScreenContent(
     paddingValues: PaddingValues,
-    viewModel: PopylarSneakersViewModel
+    viewModel: PopylarSneakersViewModel,
+    onNavigationToPopylarScreen: () -> Unit,
+    onNavigationToSortScreen: (String) -> Unit
 ) {
     val message = remember{mutableStateOf("")}
+    val aaa: List<Name>
 
     Column(
         modifier = Modifier.padding(paddingValues = paddingValues).verticalScroll(rememberScrollState()),
@@ -131,10 +141,14 @@ fun HomeScreenContent(
 
             val langs = listOf("Всё", "Outdoor", "Tennis", "Podcrdyli")
 
+
             LazyRow {
                 items(langs) { lang ->
+                    
                     Button(
-                        onClick = {},
+                        onClick = {
+                            onNavigationToSortScreen(lang)
+                        },
                         modifier = Modifier
                             .size(width = 108.dp, height = 40.dp)
                             .padding(end = 16.dp),
@@ -160,7 +174,13 @@ fun HomeScreenContent(
                 Box (
 
                 ){
-                    Text(text = "Все", fontSize = 12.sp, color = MatuleTheme.colors.accent, modifier = Modifier.padding(top = 3.5.dp, start = 258.dp))
+                    Text(text = "Все", fontSize = 12.sp, color = MatuleTheme.colors.accent, modifier = Modifier.padding(top = 3.5.dp, start = 258.dp).
+                    clickable(
+                        onClick = onNavigationToPopylarScreen,
+                        role = Role.Button,
+                        indication = LocalIndication.current,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ))
                 }
             }
 
