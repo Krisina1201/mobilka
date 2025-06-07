@@ -15,4 +15,5 @@ interface AuthSource {
     suspend fun login(@Body authRequest: AuthRequest): RegistrationResponse
     @GET("/allSneakers")
     suspend fun popular(): List<PopularSneakersResponse>
+
 }
