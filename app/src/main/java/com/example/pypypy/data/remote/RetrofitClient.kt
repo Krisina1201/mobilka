@@ -17,4 +17,8 @@ object RetrofitClient {
     val auth by lazy {
         retrofit.create(AuthSource::class.java)
     }
+
+    val protectedApi by lazy {
+        retrofit.create(AuthSource::class.java)
+    }
 }

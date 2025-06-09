@@ -41,7 +41,7 @@ class SignInViewModel(val authUseCase: AuthUseCase): ViewModel() {
 
             val result = authUseCase.auth(authRequest)
 
-            result.collect {it ->
+            result.collect {
                 when(it) {
                     is NetworkResponse.Error -> {
                         setLoading(false)

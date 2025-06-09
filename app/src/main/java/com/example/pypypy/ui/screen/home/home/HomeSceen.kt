@@ -53,6 +53,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pypypy.ui.screen.home.component.ProductItem
+import com.example.pypypy.ui.screen.home.favourite.FavouriteScreenViewModel
 import com.example.pypypy.ui.theme.MatuleTheme
 
 data class Name(
@@ -60,7 +61,8 @@ data class Name(
 )
 @Composable
 fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
-                   onNavigationToSortScreen: (String) -> Unit) {
+                   onNavigationToSortScreen: (String) -> Unit,
+                   onNavigationToFavouriteScreen: () -> Unit) {
     val sneakersViewModel: PopylarSneakersViewModel = koinViewModel<PopylarSneakersViewModel>()
 
     Scaffold(
@@ -72,7 +74,7 @@ fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
             )
         },
 
-        bottomBar = { BottomBar() }
+        bottomBar = { BottomBar(onNavigationToFavouriteScreen) }
     ) {
         paddingValues ->
         HomeScreenContent(paddingValues = paddingValues, viewModel = sneakersViewModel, onNavigationToPopylarScreen, onNavigationToSortScreen);

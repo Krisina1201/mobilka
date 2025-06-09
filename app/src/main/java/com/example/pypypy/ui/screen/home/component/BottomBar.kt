@@ -28,7 +28,7 @@ import com.example.pypypy.R
 import com.example.pypypy.ui.theme.MatuleTheme
 
 @Composable
-fun BottomBar() {
+fun BottomBar(favouriteClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -53,7 +53,7 @@ fun BottomBar() {
                 IconButton(onClick = {}) {
                     Image(painterResource(R.drawable.home), "Дом", Modifier.size(24.dp))
                 }
-                IconButton(onClick = {}) {
+                IconButton(onClick = favouriteClick) {
                     Image(painterResource(R.drawable.heart), "Избранное", Modifier.size(24.dp))
                 }
             }

@@ -5,6 +5,7 @@ import com.example.pypypy.data.remote.RetrofitClient
 import com.example.pypypy.data.remote.retrofit.AuthSource
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
+import com.example.pypypy.ui.screen.home.favourite.FavouriteScreenViewModel
 import com.example.pypypy.ui.screen.home.popylar.PopylarSneakersViewModel
 import com.example.pypypy.ui.screen.signUp.regist.RegistrViewModel
 import com.example.pypypy.ui.screen.signUp.signin.SignInViewModel
@@ -32,4 +33,5 @@ val appModules = module {
     viewModel { RegistrViewModel(get()) }
     viewModel { SignInViewModel(get()) }
     viewModel { PopylarSneakersViewModel(get())}
+    viewModel { FavouriteScreenViewModel(get()) }
 }

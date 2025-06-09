@@ -13,6 +13,7 @@ import com.example.pypypy.data.remote.RetrofitClient
 import com.example.pypypy.data.local.DataStore
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
+import com.example.pypypy.ui.screen.home.favourite.FavouriteScreen
 import com.example.pypypy.ui.screen.home.home.HomeScreenHast
 import com.example.pypypy.ui.screen.home.popylar.HomeScreen
 import com.example.pypypy.ui.screen.home.sort.SortScreen
@@ -46,9 +47,11 @@ class MainActivity : ComponentActivity() {
                         HomeScreenHast(
                             onNavigationToPopylarScreen = {navController.navigate("popylarScreen")},
                             onNavigationToSortScreen = { category ->
-                                navController.navigate("sortScreen/$category")})
+                                navController.navigate("sortScreen/$category")},
+                            onNavigationToFavouriteScreen = {navController.navigate("favoriteScreen")})
                     }
                     composable("forgotPassword") { ForgotPass() }
+                    composable("favoriteScreen") { FavouriteScreen() }
                     composable(
                         route = "sortScreen/{category}",
                         arguments = listOf(navArgument("category") { type = NavType.StringType })

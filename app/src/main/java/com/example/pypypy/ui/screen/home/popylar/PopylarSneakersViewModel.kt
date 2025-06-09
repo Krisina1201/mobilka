@@ -15,6 +15,14 @@ class PopylarSneakersViewModel(private val authUseCase: AuthUseCase):ViewModel()
 
     fun fetchSneakers() {
         viewModelScope.launch {
+            authUseCase.popylar().collect { response: NetworkResponseSneakers<List<PopularSneakersResponse>> ->
+                _sneakersState.value = response
+            }
+        }
+    }
+
+    fun allSneakers() {
+        viewModelScope.launch {
             authUseCase.getSneakers().collect { response: NetworkResponseSneakers<List<PopularSneakersResponse>> ->
                 _sneakersState.value = response
             }
