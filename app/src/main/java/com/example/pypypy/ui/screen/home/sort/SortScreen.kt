@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -33,8 +34,11 @@ import androidx.compose.ui.unit.sp
 import com.example.pypypy.R
 import com.example.pypypy.data.model.SnekersModel.PopularSneakersResponse
 import com.example.pypypy.data.remote.NetworkResponseSneakers
+import com.example.pypypy.data.remote.NetworkResponseUser
 import com.example.pypypy.ui.screen.home.component.ProductItem
+import com.example.pypypy.ui.screen.home.component.checkSneakersInFavourite
 import com.example.pypypy.ui.screen.home.component.topPanelForSort
+import com.example.pypypy.ui.screen.home.favourite.FavouriteScreenViewModel
 import com.example.pypypy.ui.screen.home.popylar.PopylarSneakersViewModel
 import com.example.pypypy.ui.theme.MatuleTheme
 import org.koin.compose.viewmodel.koinViewModel
@@ -42,9 +46,9 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun SortScreen(optionSort: String) {
     val sneakersViewModel: PopylarSneakersViewModel = koinViewModel<PopylarSneakersViewModel>()
+    val viewModel: SortScreenViewModel = koinViewModel<SortScreenViewModel>()
 
     var selectedCategory by remember { mutableStateOf(optionSort) }
-
 
     Scaffold(
         topBar = { topPanelForSort(
@@ -59,17 +63,17 @@ fun SortScreen(optionSort: String) {
             paddingValues = paddingValues,
             selectedCategory = selectedCategory,
             onCategorySelected = { category -> selectedCategory = category},
-            viewModel =  sneakersViewModel)
+            viewModelpop =  sneakersViewModel, viewModel = viewModel)
     }
 }
 
 @Composable
 fun ContentCheck(paddingValues: PaddingValues, onCategorySelected: (String) -> Unit,
-                 selectedCategory: String, viewModel: PopylarSneakersViewModel) {
-    val sneakersState by viewModel.sneakersState.collectAsState()
+                 selectedCategory: String, viewModelpop: PopylarSneakersViewModel, viewModel: SortScreenViewModel) {
+    val sneakersState by viewModelpop.sneakersState.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.allSneakers()
+        viewModelpop.allSneakers()
     }
     Column(
         modifier = Modifier.padding(paddingValues),
@@ -105,23 +109,53 @@ fun ContentCheck(paddingValues: PaddingValues, onCategorySelected: (String) -> U
             }
         }
         LazyRowSneakers(sneakersState = sneakersState,
-            optionSort = selectedCategory)
+            optionSort = selectedCategory, viewModel)
     }
 }
 
 @Composable
 fun LazyRowSneakers(sneakersState:  NetworkResponseSneakers<List<PopularSneakersResponse>>,
-                     optionSort: String){
+                     optionSort: String,
+                    viewModel: SortScreenViewModel){
+
+    val favouriteViewModel = koinViewModel<FavouriteScreenViewModel>()
+    val sneakersFavouriteState by favouriteViewModel.userState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        favouriteViewModel.getFavourite()
+    }
+
+    val likesState = remember { viewModel.signInState }
+
+    LaunchedEffect(sneakersFavouriteState, optionSort) {
+        (sneakersFavouriteState as? NetworkResponseUser.Success)?.data?.let { favItems ->
+            likesState.forEach { like ->
+                like.isLike = favItems.any { it.id == like.shoeId }
+            }
+        }
+    }
+
     when (val state = sneakersState) {
         is NetworkResponseSneakers.Loading -> {
             CircularProgressIndicator()
         }
         is NetworkResponseSneakers.Success -> {
-            var filteredSneakers = state.data.filter { it.category == optionSort }
-
+            var filteredSneakerSt = state.data.filter { it.category == optionSort }
             if (optionSort == "Всё") {
-                filteredSneakers = state.data
+                filteredSneakerSt = state.data
             }
+
+            var filteredSneakers = filteredSneakerSt.also { list ->
+                    list.forEach { sneaker ->
+                        if (likesState.none { it.shoeId == sneaker.id }) {
+                            val isFav = (sneakersFavouriteState as? NetworkResponseUser.Success)
+                                ?.data?.any { it.id == sneaker.id } ?: false
+                            likesState.add(LikeModel(sneaker.id, isFav))
+                        }
+                    }
+                }
+
+
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(end = 21.dp, start = 21.dp, bottom = 21.dp),
@@ -129,12 +163,36 @@ fun LazyRowSneakers(sneakersState:  NetworkResponseSneakers<List<PopularSneakers
                 horizontalArrangement = Arrangement.spacedBy(21.dp)
             ) {
                 items(filteredSneakers) { sneaker ->
+
+                    val likeModel = likesState.find { it.shoeId == sneaker.id }
+                    val isFavorite = likesState
+                        .find { it.shoeId == sneaker.id }
+                        ?.isLike ?: false
+
                     ProductItem(
                         title = "Best Seller",
                         name = sneaker.productName,
                         price = "₽"+sneaker.count.toString(),
                         imageRes = painterResource(R.drawable.nadejda),
                         onClick = {},
+                        likeImage = if (isFavorite) {
+                            painterResource(R.drawable.icon)
+                        } else {
+                            painterResource(R.drawable.black_heart)
+                        },
+                        likeClick = {
+                            likeModel?.let {
+                                val newState = !it.isLike
+                                likesState[likesState.indexOf(it)] = it.copy(isLike = newState)
+
+                                if (newState) {
+                                    viewModel.addToFavourite(sneaker.id)
+                                } else {
+                                    viewModel.deleteFromFavourite(sneaker.id)
+                                }
+                            }
+
+                        }
                     )
                 }
             }

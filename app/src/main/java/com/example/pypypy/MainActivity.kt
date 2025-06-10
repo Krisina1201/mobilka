@@ -51,7 +51,9 @@ class MainActivity : ComponentActivity() {
                             onNavigationToFavouriteScreen = {navController.navigate("favoriteScreen")})
                     }
                     composable("forgotPassword") { ForgotPass() }
-                    composable("favoriteScreen") { FavouriteScreen() }
+                    composable("favoriteScreen") { FavouriteScreen(
+                        onNavigationToHome = {navController.navigate("homeScreen")}
+                    ) }
                     composable(
                         route = "sortScreen/{category}",
                         arguments = listOf(navArgument("category") { type = NavType.StringType })

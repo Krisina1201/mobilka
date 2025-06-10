@@ -47,6 +47,34 @@ class AuthUseCase(private val dataStore: DataStore,
 
     }
 
+    suspend fun postFav(shoeId: Int): Flow<NetworkResponse> = flow {
+        try {
+            emit(NetworkResponse.Loading)
+            val result = authRepository.postFav(userIdGl.first(), shoeId)
+            emit(NetworkResponse.Success(result))
+        } catch (e: Exception) {
+            e.message?.let {
+                emit(NetworkResponse.Error(it))
+                return@flow
+            }
+            emit(NetworkResponse.Error("Unknown Error"))
+        }
+    }
+
+    fun deleteFav(shoeId: Int): Flow<NetworkResponse> = flow {
+        try {
+            emit(NetworkResponse.Loading)
+            val result = authRepository.deleteFav(userIdGl.first(), shoeId)
+            emit(NetworkResponse.Success(result))
+        } catch (e: Exception) {
+            e.message?.let {
+                emit(NetworkResponse.Error(it))
+                return@flow
+            }
+            emit(NetworkResponse.Error("Unknown Error"))
+        }
+    }
+
     suspend fun getUser(): Flow<NetworkResponseUser<List<PopularSneakersResponse>>> {
         return authRepository.getProfile(userIdGl.first())
     }

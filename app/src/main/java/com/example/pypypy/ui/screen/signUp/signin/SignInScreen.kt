@@ -134,8 +134,6 @@ fun SignInContent(
                 .padding(8.dp)
         )
 
-        val coroutine = rememberCoroutineScope()
-
         AuthButton(onClick = {
                 viewModel.sighIn()
         }) {

@@ -33,6 +33,16 @@ class AuthRepositoryImpl(val dataStore: DataStore, val authRemoteSource: AuthSou
         return result
     }
 
+    suspend fun postFav(userId: Int, shoeId: Int): Boolean {
+        val result = authRemoteSource.addFavorite(userId = userId, shoes_id = shoeId)
+        return result
+    }
+
+    suspend fun deleteFav(userId: Int, shoeId: Int): Boolean {
+        val result = authRemoteSource.deleteFavorite(userId = userId, shoes_id = shoeId)
+        return result
+    }
+
     fun popylarSneakers(): Flow<NetworkResponseSneakers<List<PopularSneakersResponse>>> = flow {
 
         try {

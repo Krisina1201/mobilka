@@ -6,6 +6,7 @@ import com.example.pypypy.data.model.SignInModel.RegistrationResponse
 import com.example.pypypy.data.model.SignInModel.UserResponce
 import com.example.pypypy.data.model.SnekersModel.PopularSneakersResponse
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -24,4 +25,15 @@ interface AuthSource {
     suspend fun getProfile(
         @Path("id") userId: Int
     ): List<PopularSneakersResponse>
+    @POST("/users/{user_id}/favorites/shoes/{shoes_id}")
+    suspend fun addFavorite(
+        @Path(value = "user_id") userId: Int,
+        @Path(value = "shoes_id") shoes_id: Int
+    ): Boolean
+
+    @DELETE("/users/{user_id}/favorites/shoes/{shoes_id}")
+    suspend fun deleteFavorite(
+        @Path(value = "user_id") userId: Int,
+        @Path(value = "shoes_id") shoes_id: Int
+    ): Boolean
 }

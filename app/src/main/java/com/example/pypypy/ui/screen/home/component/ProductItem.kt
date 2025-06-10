@@ -34,8 +34,8 @@ fun ProductItem(
     price: String,
     imageRes: Painter,
     onClick: () -> Unit,
-
-
+    likeImage: Painter,
+    likeClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -49,13 +49,13 @@ fun ProductItem(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         IconButton(
-            onClick = { /* Favorite action */ },
+            onClick = likeClick,
             modifier = Modifier
                 .padding(8.dp)
                 .size(24.dp)
         ) {
             Image(
-                painter = painterResource(R.drawable.icon),
+                painter = likeImage,
                 contentDescription = "Favorite",
                 modifier = Modifier.size(28.dp)
             )

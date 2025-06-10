@@ -7,6 +7,7 @@ import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
 import com.example.pypypy.ui.screen.home.favourite.FavouriteScreenViewModel
 import com.example.pypypy.ui.screen.home.popylar.PopylarSneakersViewModel
+import com.example.pypypy.ui.screen.home.sort.SortScreenViewModel
 import com.example.pypypy.ui.screen.signUp.regist.RegistrViewModel
 import com.example.pypypy.ui.screen.signUp.signin.SignInViewModel
 import org.koin.core.module.dsl.viewModel
@@ -34,4 +35,5 @@ val appModules = module {
     viewModel { SignInViewModel(get()) }
     viewModel { PopylarSneakersViewModel(get())}
     viewModel { FavouriteScreenViewModel(get()) }
+    viewModel { SortScreenViewModel(get()) }
 }

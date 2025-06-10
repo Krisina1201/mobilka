@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
@@ -28,7 +29,11 @@ import com.example.pypypy.R
 import com.example.pypypy.ui.theme.MatuleTheme
 
 @Composable
-fun BottomBar(favouriteClick: () -> Unit) {
+fun BottomBar(favouriteClick: () -> Unit,
+              backgroundHomeImage: Painter,
+              backgroundFavouriteImage: Painter,
+              homeClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -50,11 +55,11 @@ fun BottomBar(favouriteClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(42.dp)) {
-                IconButton(onClick = {}) {
-                    Image(painterResource(R.drawable.home), "Дом", Modifier.size(24.dp))
+                IconButton(onClick = homeClick) {
+                    Image(backgroundHomeImage, "Дом", Modifier.size(24.dp))
                 }
                 IconButton(onClick = favouriteClick) {
-                    Image(painterResource(R.drawable.heart), "Избранное", Modifier.size(24.dp))
+                    Image(backgroundFavouriteImage, "Избранное", Modifier.size(24.dp))
                 }
             }
 

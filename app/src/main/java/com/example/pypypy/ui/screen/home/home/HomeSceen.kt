@@ -74,7 +74,11 @@ fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
             )
         },
 
-        bottomBar = { BottomBar(onNavigationToFavouriteScreen) }
+        bottomBar = { BottomBar(onNavigationToFavouriteScreen,
+            backgroundHomeImage = painterResource(R.drawable.home_blue),
+            backgroundFavouriteImage = painterResource(R.drawable.heart),
+            homeClick = {}
+        ) }
     ) {
         paddingValues ->
         HomeScreenContent(paddingValues = paddingValues, viewModel = sneakersViewModel, onNavigationToPopylarScreen, onNavigationToSortScreen);
@@ -195,6 +199,8 @@ fun HomeScreenContent(
                     price = "₽752",
                     imageRes = painterResource(R.drawable.nadejda),
                     onClick = {},
+                    likeImage = painterResource(R.drawable.icon),
+                    likeClick = {}
                 )
 
                 Column(modifier = Modifier.fillMaxHeight().width(51.dp)) {}
@@ -205,6 +211,8 @@ fun HomeScreenContent(
                     price = "₽752",
                     imageRes = painterResource(R.drawable.nadejda),
                     onClick = {},
+                    likeImage = painterResource(R.drawable.icon),
+                    likeClick = {}
                 )
             }
 
