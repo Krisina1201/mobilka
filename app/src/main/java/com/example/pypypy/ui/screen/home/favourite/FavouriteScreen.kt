@@ -30,7 +30,8 @@ import com.example.pypypy.ui.screen.home.sort.LikeModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun FavouriteScreen(onNavigationToHome: () -> Unit,) {
+fun FavouriteScreen(onNavigationToHome: () -> Unit,
+                    onNavigationToTrash: () -> Unit) {
     val favouriteViewModel = koinViewModel<FavouriteScreenViewModel>()
 
     Scaffold(
@@ -43,7 +44,8 @@ fun FavouriteScreen(onNavigationToHome: () -> Unit,) {
             favouriteClick = {},
             backgroundFavouriteImage = painterResource(R.drawable.heart_blue),
             backgroundHomeImage = painterResource(R.drawable.home),
-            homeClick = onNavigationToHome
+            homeClick = onNavigationToHome,
+            trashClick = onNavigationToTrash
         ) }
     ) {
             paddingValues ->

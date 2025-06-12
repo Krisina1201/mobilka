@@ -32,7 +32,8 @@ import com.example.pypypy.ui.theme.MatuleTheme
 fun BottomBar(favouriteClick: () -> Unit,
               backgroundHomeImage: Painter,
               backgroundFavouriteImage: Painter,
-              homeClick: () -> Unit
+              homeClick: () -> Unit,
+              trashClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -69,7 +70,7 @@ fun BottomBar(favouriteClick: () -> Unit,
                 modifier = Modifier.padding(bottom = 30.dp)
             ) {
                 IconButton(
-                    onClick = {},
+                    onClick = trashClick,
                     modifier = Modifier
                         .size(56.dp)
                         .background(

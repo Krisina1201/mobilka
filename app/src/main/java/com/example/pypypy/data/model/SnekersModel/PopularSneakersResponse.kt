@@ -12,3 +12,16 @@ data class PopularSneakersResponse(
     var description: String,
     var category: String
 )
+
+@Serializable
+data class Basket(
+    var sneakersId: Int,
+    var userId: Int,
+    var count: Int
+)
+
+@Serializable
+data class SneakersInBasket(
+    val sneakers: PopularSneakersResponse,
+    var countInBasket: Int
+)

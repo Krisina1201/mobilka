@@ -62,7 +62,8 @@ data class Name(
 @Composable
 fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
                    onNavigationToSortScreen: (String) -> Unit,
-                   onNavigationToFavouriteScreen: () -> Unit) {
+                   onNavigationToFavouriteScreen: () -> Unit,
+                   onNavigationToTrashScreen: () -> Unit,) {
     val sneakersViewModel: PopylarSneakersViewModel = koinViewModel<PopylarSneakersViewModel>()
 
     Scaffold(
@@ -77,7 +78,8 @@ fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
         bottomBar = { BottomBar(onNavigationToFavouriteScreen,
             backgroundHomeImage = painterResource(R.drawable.home_blue),
             backgroundFavouriteImage = painterResource(R.drawable.heart),
-            homeClick = {}
+            homeClick = {},
+            trashClick = onNavigationToTrashScreen
         ) }
     ) {
         paddingValues ->
@@ -90,7 +92,8 @@ fun HomeScreenContent(
     paddingValues: PaddingValues,
     viewModel: PopylarSneakersViewModel,
     onNavigationToPopylarScreen: () -> Unit,
-    onNavigationToSortScreen: (String) -> Unit
+    onNavigationToSortScreen: (String) -> Unit,
+
 ) {
     val message = remember{mutableStateOf("")}
     val aaa: List<Name>

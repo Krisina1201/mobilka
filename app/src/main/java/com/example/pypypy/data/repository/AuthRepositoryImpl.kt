@@ -6,7 +6,9 @@ import com.example.pypypy.data.model.SignInModel.AuthRequest
 import com.example.pypypy.data.model.SignInModel.RegistrationRequest
 import com.example.pypypy.data.model.SignInModel.RegistrationResponse
 import com.example.pypypy.data.model.SignInModel.UserResponce
+import com.example.pypypy.data.model.SnekersModel.Basket
 import com.example.pypypy.data.model.SnekersModel.PopularSneakersResponse
+import com.example.pypypy.data.model.SnekersModel.SneakersInBasket
 import com.example.pypypy.data.remote.NetworkResponse
 import com.example.pypypy.data.remote.NetworkResponseSneakers
 import com.example.pypypy.data.remote.NetworkResponseUser
@@ -69,6 +71,27 @@ class AuthRepositoryImpl(val dataStore: DataStore, val authRemoteSource: AuthSou
         } catch (e: Exception) {
             emit(NetworkResponseUser.Error(e.message ?: "Unknown error occurred"))
         }
+    }
+
+    fun getBakset(userId: Int): Flow<NetworkResponseSneakers<List<SneakersInBasket>>> = flow {
+
+        try {
+            emit(NetworkResponseSneakers.Loading)
+            val result = authRemoteSource.getBasket(userId)
+            emit(NetworkResponseSneakers.Success(result))
+        } catch (e: Exception) {
+            emit(NetworkResponseSneakers.Error(e.message ?: "Unknown Error"))
+        }
+    }
+
+    suspend fun deleteFromBasket(basket: Basket): Boolean {
+        val result = authRemoteSource.deleteInBasket(basket)
+        return result
+    }
+
+    suspend fun addFromBasket(basket: Basket): Boolean {
+        val result = authRemoteSource.addInBasket(basket)
+        return result
     }
 
     fun getSneakers(): Flow<NetworkResponseSneakers<List<PopularSneakersResponse>>> = flow {

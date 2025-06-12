@@ -6,6 +6,7 @@ import com.example.pypypy.data.remote.retrofit.AuthSource
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
 import com.example.pypypy.ui.screen.home.favourite.FavouriteScreenViewModel
+import com.example.pypypy.ui.screen.home.garbage.GarbageScreenViewModel
 import com.example.pypypy.ui.screen.home.popylar.PopylarSneakersViewModel
 import com.example.pypypy.ui.screen.home.sort.SortScreenViewModel
 import com.example.pypypy.ui.screen.signUp.regist.RegistrViewModel
@@ -36,4 +37,5 @@ val appModules = module {
     viewModel { PopylarSneakersViewModel(get())}
     viewModel { FavouriteScreenViewModel(get()) }
     viewModel { SortScreenViewModel(get()) }
+    viewModel { GarbageScreenViewModel(get()) }
 }

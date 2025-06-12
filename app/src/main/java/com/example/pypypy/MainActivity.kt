@@ -14,6 +14,7 @@ import com.example.pypypy.data.local.DataStore
 import com.example.pypypy.data.repository.AuthRepositoryImpl
 import com.example.pypypy.domain.usecase.AuthUseCase
 import com.example.pypypy.ui.screen.home.favourite.FavouriteScreen
+import com.example.pypypy.ui.screen.home.garbage.GarbageScreen
 import com.example.pypypy.ui.screen.home.home.HomeScreenHast
 import com.example.pypypy.ui.screen.home.popylar.HomeScreen
 import com.example.pypypy.ui.screen.home.sort.SortScreen
@@ -48,11 +49,14 @@ class MainActivity : ComponentActivity() {
                             onNavigationToPopylarScreen = {navController.navigate("popylarScreen")},
                             onNavigationToSortScreen = { category ->
                                 navController.navigate("sortScreen/$category")},
-                            onNavigationToFavouriteScreen = {navController.navigate("favoriteScreen")})
+                            onNavigationToFavouriteScreen = {navController.navigate("favoriteScreen")},
+                            onNavigationToTrashScreen = {navController.navigate("trashScreen")})
                     }
                     composable("forgotPassword") { ForgotPass() }
+                    composable ("trashScreen") { GarbageScreen() }
                     composable("favoriteScreen") { FavouriteScreen(
-                        onNavigationToHome = {navController.navigate("homeScreen")}
+                        onNavigationToHome = {navController.navigate("homeScreen")},
+                        onNavigationToTrash = {navController.navigate("trashScreen")}
                     ) }
                     composable(
                         route = "sortScreen/{category}",

@@ -36,7 +36,6 @@ import com.example.pypypy.data.remote.NetworkResponseSneakers
 import com.example.pypypy.data.remote.NetworkResponseUser
 import com.example.pypypy.ui.screen.home.component.ProductItem
 import com.example.pypypy.ui.screen.home.component.TopPanel
-import com.example.pypypy.ui.screen.home.component.checkSneakersInFavourite
 import com.example.pypypy.ui.screen.home.favourite.FavouriteScreenViewModel
 import com.example.pypypy.ui.screen.home.sort.LikeModel
 import org.koin.compose.viewmodel.koinViewModel
