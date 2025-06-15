@@ -63,7 +63,8 @@ data class Name(
 fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
                    onNavigationToSortScreen: (String) -> Unit,
                    onNavigationToFavouriteScreen: () -> Unit,
-                   onNavigationToTrashScreen: () -> Unit,) {
+                   onNavigationToTrashScreen: () -> Unit,
+                   onNavigationToFilterScreen: () -> Unit) {
     val sneakersViewModel: PopylarSneakersViewModel = koinViewModel<PopylarSneakersViewModel>()
 
     Scaffold(
@@ -83,7 +84,7 @@ fun HomeScreenHast(onNavigationToPopylarScreen: () -> Unit,
         ) }
     ) {
         paddingValues ->
-        HomeScreenContent(paddingValues = paddingValues, viewModel = sneakersViewModel, onNavigationToPopylarScreen, onNavigationToSortScreen);
+        HomeScreenContent(paddingValues = paddingValues, viewModel = sneakersViewModel, onNavigationToPopylarScreen, onNavigationToSortScreen, onNavigationToFilterScreen);
     }
 }
 
@@ -93,7 +94,7 @@ fun HomeScreenContent(
     viewModel: PopylarSneakersViewModel,
     onNavigationToPopylarScreen: () -> Unit,
     onNavigationToSortScreen: (String) -> Unit,
-
+    onNavigationToFilterScreen: () -> Unit
 ) {
     val message = remember{mutableStateOf("")}
     val aaa: List<Name>
@@ -113,7 +114,9 @@ fun HomeScreenContent(
                 placeholder = { Text("Поиск") },
                 modifier = Modifier
                     .weight(1f)
-                    .requiredHeight(52.dp),
+                    .requiredHeight(52.dp)
+
+                ,
                 leadingIcon = {Icon(painterResource(R.drawable.check), contentDescription = "Поиск")},
                 shape = RoundedCornerShape(12.dp),
                 colors = TextFieldDefaults.colors(
@@ -128,7 +131,7 @@ fun HomeScreenContent(
                 )
             )
             IconButton(
-                onClick = {  },
+                onClick = onNavigationToFilterScreen,
                 modifier = Modifier
                     .size(52.dp)
                     .background(
@@ -203,7 +206,9 @@ fun HomeScreenContent(
                     imageRes = painterResource(R.drawable.nadejda),
                     onClick = {},
                     likeImage = painterResource(R.drawable.icon),
-                    likeClick = {}
+                    likeClick = {},
+                    cartImage = painterResource(R.drawable.group_1072),
+                    cartClick = {}
                 )
 
                 Column(modifier = Modifier.fillMaxHeight().width(51.dp)) {}
@@ -215,7 +220,9 @@ fun HomeScreenContent(
                     imageRes = painterResource(R.drawable.nadejda),
                     onClick = {},
                     likeImage = painterResource(R.drawable.icon),
-                    likeClick = {}
+                    likeClick = {},
+                    cartImage = painterResource(R.drawable.group_1000000808),
+                    cartClick = {}
                 )
             }
 

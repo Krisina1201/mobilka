@@ -27,6 +27,7 @@ import com.example.pypypy.ui.theme.MatuleTheme
 import com.example.pypypy.ui.theme.MatuleTheme.colors
 
 
+// ProductItem.kt
 @Composable
 fun ProductItem(
     title: String,
@@ -35,12 +36,14 @@ fun ProductItem(
     imageRes: Painter,
     onClick: () -> Unit,
     likeImage: Painter,
-    likeClick: () -> Unit
+    likeClick: () -> Unit,
+    cartImage: Painter,
+    cartClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .width(160.dp)
-            .height(186.5.dp) // Точная высота из макета
+            .height(186.5.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
             .clickable(onClick = onClick)
@@ -48,18 +51,37 @@ fun ProductItem(
             .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        IconButton(
-            onClick = likeClick,
-            modifier = Modifier
-                .padding(8.dp)
-                .size(24.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
-                painter = likeImage,
-                contentDescription = "Favorite",
-                modifier = Modifier.size(28.dp)
-            )
+            IconButton(
+                onClick = likeClick,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(24.dp)
+            ) {
+                Image(
+                    painter = likeImage,
+                    contentDescription = "Favorite",
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+
+            IconButton(
+                onClick = cartClick,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(24.dp)
+            ) {
+                Image(
+                    painter = cartImage,
+                    contentDescription = "Cart",
+                    modifier = Modifier.size(28.dp)
+                )
+            }
         }
+
         Image(
             painter = imageRes,
             contentDescription = name,
@@ -67,14 +89,12 @@ fun ProductItem(
             modifier = Modifier.size(114.dp, 53.dp).padding(horizontal = 12.dp)
         )
 
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp)
                 .padding(bottom = 12.dp)
         ) {
-            // BEST SELLER label
             Text(
                 text = title,
                 color = colors.accent,
@@ -83,7 +103,6 @@ fun ProductItem(
                 modifier = Modifier.padding(bottom = 4.dp)
             )
 
-            // Product Name
             Text(
                 text = name,
                 fontSize = 14.sp,
@@ -92,31 +111,12 @@ fun ProductItem(
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
-            // Price and Cart Button
-            Row(
-                modifier = Modifier.align(Alignment.Start).fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Bottom
-            ) {
-                Text(
-                    text = price,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-
-                IconButton(
-                    onClick = { /* Add to cart */ },
-                    modifier = Modifier.size(36.dp)
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.group_1072),
-                        contentDescription = "Add to cart",
-                        modifier = Modifier
-                            .size(36.dp)
-                    )
-                }
-            }
+            Text(
+                text = price,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
         }
     }
 }

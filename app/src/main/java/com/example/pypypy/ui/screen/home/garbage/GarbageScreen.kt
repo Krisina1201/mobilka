@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,17 +39,29 @@ import androidx.compose.ui.unit.sp
 import com.example.pypypy.R
 import com.example.pypypy.data.remote.NetworkResponseSneakers
 import com.example.pypypy.ui.screen.hello.component.text
+import com.example.pypypy.ui.screen.home.component.CartManager
 import com.example.pypypy.ui.screen.home.component.SwipeableProductItem
 import com.example.pypypy.ui.screen.home.component.TopPanel
 import com.example.pypypy.ui.screen.home.component.topPanelForSort
 import com.example.pypypy.ui.screen.home.favourite.FavouriteScreenViewModel
+import com.example.pypypy.ui.screen.home.popylar.PopylarSneakersViewModel
+import com.example.pypypy.ui.screen.home.sort.SortScreenViewModel
 import com.example.pypypy.ui.theme.MatuleTheme
 import io.ktor.websocket.Frame
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.context.KoinContext
+
 
 @Composable
 fun GarbageScreen() {
+    val context = LocalContext.current
     val viewModel = koinViewModel<GarbageScreenViewModel>()
+    val cartManager = koinViewModel<CartManager>()
+    LaunchedEffect(Unit) {
+        cartManager.cartUpdates.collect {
+            viewModel.refreshBasket()
+        }
+    }
     Scaffold(
         topBar = {
             topPanelForSort(

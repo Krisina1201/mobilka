@@ -168,10 +168,14 @@ fun LazyRowSneakers(sneakersState:  NetworkResponseSneakers<List<PopularSneakers
                         .find { it.shoeId == sneaker.id }
                         ?.isLike ?: false
 
+                    val isInCart = viewModel.cartState
+                        .find { it.shoeId == sneaker.id }
+                        ?.inCart ?: false
+
                     ProductItem(
                         title = "Best Seller",
                         name = sneaker.productName,
-                        price = "₽"+sneaker.count.toString(),
+                        price = "₽"+sneaker.cost,
                         imageRes = painterResource(R.drawable.nadejda),
                         onClick = {},
                         likeImage = if (isFavorite) {
@@ -191,6 +195,14 @@ fun LazyRowSneakers(sneakersState:  NetworkResponseSneakers<List<PopularSneakers
                                 }
                             }
 
+                        },
+                        cartImage = if (isInCart) {
+                            painterResource(R.drawable.group_1072)
+                        } else {
+                            painterResource(R.drawable.group_1000000808)
+                        },
+                        cartClick = {
+                            viewModel.addToCart(sneaker.id)
                         }
                     )
                 }

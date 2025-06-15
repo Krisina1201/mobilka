@@ -17,6 +17,7 @@ import com.example.pypypy.ui.screen.home.favourite.FavouriteScreen
 import com.example.pypypy.ui.screen.home.garbage.GarbageScreen
 import com.example.pypypy.ui.screen.home.home.HomeScreenHast
 import com.example.pypypy.ui.screen.home.popylar.HomeScreen
+import com.example.pypypy.ui.screen.home.search.SearchScreen
 import com.example.pypypy.ui.screen.home.sort.SortScreen
 import com.example.pypypy.ui.screen.signUp.forgotPassword.ForgotPass
 import com.example.pypypy.ui.screen.signUp.regist.RegistorScreen
@@ -50,9 +51,12 @@ class MainActivity : ComponentActivity() {
                             onNavigationToSortScreen = { category ->
                                 navController.navigate("sortScreen/$category")},
                             onNavigationToFavouriteScreen = {navController.navigate("favoriteScreen")},
-                            onNavigationToTrashScreen = {navController.navigate("trashScreen")})
+                            onNavigationToTrashScreen = {navController.navigate("trashScreen")},
+                            onNavigationToFilterScreen = {navController.navigate("filterScreen")}
+                            )
                     }
                     composable("forgotPassword") { ForgotPass() }
+                    composable("filterScreen") { SearchScreen() }
                     composable ("trashScreen") { GarbageScreen() }
                     composable("favoriteScreen") { FavouriteScreen(
                         onNavigationToHome = {navController.navigate("homeScreen")},

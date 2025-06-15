@@ -31,6 +31,10 @@ class GarbageScreenViewModel(private val authUseCase: AuthUseCase) : ViewModel()
         loadBasket()
     }
 
+    fun refreshBasket() {
+        loadBasket()
+    }
+
     fun loadBasket() {
         viewModelScope.launch {
             authUseCase.getBasket()
@@ -84,6 +88,8 @@ class GarbageScreenViewModel(private val authUseCase: AuthUseCase) : ViewModel()
             }
         }
     }
+
+
 
     private fun calculateTotal(items: List<SneakersInBasket>) {
         val total = items.sumOf {
