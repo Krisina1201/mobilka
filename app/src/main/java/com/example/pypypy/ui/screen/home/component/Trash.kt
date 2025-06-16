@@ -94,11 +94,12 @@ fun SwipeableProductItem(
         ) {
             Row(horizontalArrangement = Arrangement.Center) {
                 Image(
-                    painter = painterResource(com.example.pypypy.R.drawable.nadejda),
+                    painter = painterResource(com.example.pypypy.R.drawable.shoe2),
                     contentDescription = "Sneaker Image",
                     modifier = Modifier
                         .width(100.dp)
-                        .height(70.dp),
+                        .height(70.dp)
+                        .padding(end=10.dp),
                 )
                 Column {
                     Text(
@@ -108,7 +109,7 @@ fun SwipeableProductItem(
                         color = Color.DarkGray
                     )
                     Text(
-                        text = sneakers.cost,
+                        text = "₽"+sneakers.cost,
                         fontSize = 15.sp,
                         modifier = Modifier.padding(5.dp),
                         color = Color.Black

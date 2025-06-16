@@ -116,7 +116,7 @@ fun GarbageScreenContent(
                         SwipeableProductItem(
                             sneakers = item.sneakers,
                             quantity = item.countInBasket,
-                            onClick = { /* Действие при нажатии на товар */ },
+                            onClick = {  },
                             onIncrease = {
                                 viewModel.updateQuantity(item.sneakers.id)
                             },
@@ -130,7 +130,6 @@ fun GarbageScreenContent(
                     }
                 }
 
-                // Панель с итогами
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()

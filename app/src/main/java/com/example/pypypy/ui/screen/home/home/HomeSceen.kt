@@ -203,11 +203,11 @@ fun HomeScreenContent(
                     title = "Best Seller",
                     name = "Nike Air Max",
                     price = "₽752",
-                    imageRes = painterResource(R.drawable.nadejda),
+                    imageRes = painterResource(R.drawable.shoe2),
                     onClick = {},
                     likeImage = painterResource(R.drawable.icon),
                     likeClick = {},
-                    cartImage = painterResource(R.drawable.group_1072),
+                    cartImage = painterResource(R.drawable.plus),
                     cartClick = {}
                 )
 
@@ -217,11 +217,11 @@ fun HomeScreenContent(
                     title = "Best Seller",
                     name = "Nike Air Max",
                     price = "₽752",
-                    imageRes = painterResource(R.drawable.nadejda),
+                    imageRes = painterResource(R.drawable.shoe2),
                     onClick = {},
                     likeImage = painterResource(R.drawable.icon),
                     likeClick = {},
-                    cartImage = painterResource(R.drawable.group_1000000808),
+                    cartImage = painterResource(R.drawable.korr),
                     cartClick = {}
                 )
             }

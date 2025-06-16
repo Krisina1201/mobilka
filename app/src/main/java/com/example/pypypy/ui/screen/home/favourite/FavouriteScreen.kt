@@ -111,7 +111,7 @@ fun favouriteContent(paddingValues: PaddingValues, viewModel: FavouriteScreenVie
                             title = "Best Seller",
                             name = sneaker.productName,
                             price = "₽"+sneaker.cost,
-                            imageRes = painterResource(R.drawable.nadejda),
+                            imageRes = painterResource(R.drawable.shoe2),
                             onClick = {},
                             likeImage = if (isFavorite) {
                                 painterResource(R.drawable.icon)
@@ -132,9 +132,9 @@ fun favouriteContent(paddingValues: PaddingValues, viewModel: FavouriteScreenVie
                                 }
                             },
                             cartImage = if (isInCart) {
-                                painterResource(R.drawable.group_1072)
+                                painterResource(R.drawable.plus)
                             } else {
-                                painterResource(R.drawable.group_1000000808)
+                                painterResource(R.drawable.korr)
                             },
                             cartClick = {
                                 viewModel.addToCart(sneaker.id)

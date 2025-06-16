@@ -31,8 +31,8 @@ import com.example.pypypy.ui.theme.MatuleTheme.colors
 @Composable
 fun ProductItem(
     title: String,
-    name: String,
     price: String,
+    name:String,
     imageRes: Painter,
     onClick: () -> Unit,
     likeImage: Painter,
@@ -51,56 +51,49 @@ fun ProductItem(
             .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
             IconButton(
                 onClick = likeClick,
                 modifier = Modifier
                     .padding(8.dp)
                     .size(24.dp)
+                    //.background(Color.Yellow)
             ) {
                 Image(
                     painter = likeImage,
                     contentDescription = "Favorite",
-                    modifier = Modifier.size(28.dp)
+                    modifier = Modifier.size(28.dp).align(Alignment.TopStart),
+
                 )
             }
 
-            IconButton(
-                onClick = cartClick,
+            Image(
+                painter = imageRes,
+                contentDescription = "name",
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.BottomCenter,
                 modifier = Modifier
-                    .padding(8.dp)
-                    .size(24.dp)
-            ) {
-                Image(
-                    painter = cartImage,
-                    contentDescription = "Cart",
-                    modifier = Modifier.size(28.dp)
-                )
-            }
+                    .width(114.dp)
+                    .height(80.dp)
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 8.dp),
+            )
         }
 
-        Image(
-            painter = imageRes,
-            contentDescription = name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.size(114.dp, 53.dp).padding(horizontal = 12.dp)
-        )
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp)
-                .padding(bottom = 12.dp)
         ) {
             Text(
                 text = title,
-                color = colors.accent,
+                color = Color(0xFF48B2E7),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 4.dp)
+                modifier = Modifier.padding(bottom = 4.dp).padding(horizontal = 12.dp)
             )
 
             Text(
@@ -108,16 +101,79 @@ fun ProductItem(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.Black,
-                modifier = Modifier.padding(bottom = 8.dp)
+                modifier = Modifier.padding(bottom = 8.dp).padding(horizontal = 12.dp)
             )
 
-            Text(
-                text = price,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = price,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black,
+                    modifier = Modifier.padding(horizontal = 12.dp).padding(bottom = 12.dp)
+                )
+//                IconButton(
+//                    onClick = cartClick,
+//                    modifier = Modifier
+//                        .padding(top=10.dp)
+//                        //.size(24.dp)
+//                        .background(Color.Green)
+//                        .align(Alignment.BottomEnd)
+//                ) {
+//                    Image(
+//                        painter = cartImage,
+//                        contentDescription = "Cart",
+//                        //modifier = Modifier.size(28.dp)
+//                    )
+//                }
+                IconButton(
+                    onClick = cartClick,
+                    modifier = Modifier
+                        .size(34.dp, 36.dp)
+                        .background(
+                            Color(0xFF48B2E7),
+                            shape = RoundedCornerShape(percent = 20)
+                        )
+                        .align(Alignment.BottomEnd),
+                        //.padding(end = 8.dp, bottom = 8.dp)  // Отступы от краев
+
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize(1f)
+                    ) {
+                        Image(
+                            painter = cartImage,  // Ваша иконка корзины
+                            contentDescription = "Добавить в корзину",
+                            modifier = Modifier.size(27.dp)
+                                .align(Alignment.TopStart)
+                                .padding(top=7.dp)
+
+                        )
+                    }
+                }
+            }
+
         }
     }
 }
+
+//@Preview
+//@Composable
+//fun check () {
+//    ProductItem(
+//        title = "Best Seller",
+//        price = "1000",
+//        imageRes = painterResource( R.drawable.shoe2),
+//        onClick = {},
+//        likeImage = painterResource(R.drawable.icon),
+//        likeClick = {},
+//        cartImage = painterResource(R.drawable.group_1000000808),
+//        cartClick = {},
+//        name = "Nike"
+//    )
+//}
 
